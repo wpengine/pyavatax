@@ -1,5 +1,8 @@
 *.pyc
 *.swp
+*.egg-info/
+*.egg
+*.eggs/
 MANIFEST
 docs/build
 build/
@@ -8,3 +11,5 @@ settings_local.py
 env/
 .idea/
 .cache/
+
+/pyavatax/VERSION
