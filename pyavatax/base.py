@@ -110,7 +110,7 @@ class AvalaraBase(object):
                     if isinstance(_v, klass):
                         getattr(self, k).append(_v)
                     elif isinstance(_v, dict):
-                        getattr(self, k).append(klass(allow_new_fields=self.allow_new_fields,**_v))
+                        getattr(self, k).append(klass(allow_new_fields=self.allow_new_fields, **_v))
             else:
                 self._invalid_field(k)
         self.clean()
@@ -179,7 +179,6 @@ class BaseAPI(object):
         data = data.replace('\\n', ' ')
         kwargs = {
             'params': params,
-            'data': data,
             'headers': self.headers,
             'auth': (self.username, self.password),
             'proxies': self.proxies,
@@ -191,6 +190,7 @@ class BaseAPI(object):
                 kwargs.pop('data')
                 resp = requests.get(url, **kwargs)
             elif http_method == 'POST':
+                kwargs.update({'data': data})
                 resp = requests.post(url, **kwargs)
         except (requests.exceptions.ConnectionError, requests.exceptions.SSLError, requests.exceptions.HTTPError, requests.exceptions.Timeout) as e:
             self.logger.warning(e)
@@ -602,7 +602,7 @@ class TaxOverride(AvalaraBase):
     OVERRIDE_AMOUNT = 'TaxAmount'
     OVERRIDE_DATE = 'TaxDate'
     OVERRIDE_EXEMPT = 'Exemption'
-    OVERRIDE_TYPES = ( OVERRIDE_NONE, OVERRIDE_AMOUNT, OVERRIDE_DATE, OVERRIDE_EXEMPT )
+    OVERRIDE_TYPES = (OVERRIDE_NONE, OVERRIDE_AMOUNT, OVERRIDE_DATE, OVERRIDE_EXEMPT)
     _fields = ['TaxOverrideType', 'TaxAmount', 'TaxDate', 'Reason']
 
     @staticmethod
