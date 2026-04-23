@@ -5,7 +5,7 @@ decorator==3.4.0  # to preserve introspection funcsig integrity
 suds-jurko==0.6
 six==1.9.0
 # tests are run with pytest, fixtures for tests as well, Sphinx for documentation
-pytest==2.6.4
+pytest==9.0.3
 testfixtures==4.1.2
 Sphinx==1.1.3
 simplejson==3.3.0
